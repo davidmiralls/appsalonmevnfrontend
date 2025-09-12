@@ -1,5 +1,9 @@
 import { RouterView } from 'vue-router';
 <script setup>
+import { useUserStore } from '@/stores/user';
+
+
+const user= useUserStore()
 
 </script>
 
@@ -8,15 +12,20 @@ import { RouterView } from 'vue-router';
             <h1 class="text-2xl lg:text-6xl font-black text-white">AppSalón</h1>
             <div class="flex flex-col space-y-5">
                 <div class="flex gap-2 items-center">
-                    <p class="text-white text-right">Hola: Usuario</p>
+                    <p class="text-white text-right">Hola: {{user.getUserName}}</p>
                     <button
-                    class="bg-res-600 hover:bg-red-700 p-2 text-white uppercase text-xs font-extrabold rounded-lg">
+                    class="bg-res-600 hover:bg-red-700 p-2 text-white uppercase text-xs font-extrabold rounded-lg"
+                    @click="user.logout">
                         Cerrar Sesión
                     </button>
 
                 </div>
                 <nav class="flex gap-2 items-center justify-end">
-                    <button class="p-3 text-gray-200 uppercase text-xs font-black borunde-lg">Mis Citas</button>
+                    <RouterLink
+                        :to="{name: 'my-appointments'}">
+                        <button class="p-3 text-gray-200 uppercase text-xs font-black borunde-lg">Mis Citas</button>
+
+                    </RouterLink>
                     <RouterLink
                     class="p-3 text-gray-200 uppercase text-xs font-black borunde-lg bg-blue-700"
                     :to="{name: 'new-appointment'}"

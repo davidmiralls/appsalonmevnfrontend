@@ -25,10 +25,12 @@ import { RouterLink } from 'vue-router';
     </RouterLink>
 
 </nav>
+<div class="space-y-5">
 
+    <RouterView />
+</div>
 
  
-    <RouterView />
 </template>
 
 
