@@ -22,7 +22,7 @@
 
         <p class="text-4xl font-black"
          :class="appointments.isServiceSelected(service._id) ? ' text-white': 'text-blue-600'"
-        >{{ formatCurrency(service.price) }}</p>
+        >{{ formatCurrency( service.price ) }}</p>
         
     </div>
 </template>
