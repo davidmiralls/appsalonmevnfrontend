@@ -73,7 +73,7 @@ const handleSubmit = async({password_confirm, ...formData}) => {
                     placeholder="Password de Usuario - Min 8 Caracteres"
                     validation="required|length:8"
                     :validation-messages="{
-                        required: 'El email es obligatorio',
+                        required: 'El password es obligatorio',
                         length: 'Password debe contener al menos 8 caracteres'
 
                     }"
@@ -86,7 +86,7 @@ const handleSubmit = async({password_confirm, ...formData}) => {
                     placeholder="Repite el password"
                     validation="required|confirm"
                     :validation-messages="{
-                        required: 'El email es obligatorio',
+                        required: 'El password es obligatorio',
                         confirm: 'Los Password no son iguales'
 
                     }"

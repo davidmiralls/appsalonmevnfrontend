@@ -11,6 +11,20 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
     },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: ()=> import('../views/admin/adminLayout.vue'),
+      meta: { requiresAdmin:true },
+      children: [
+        {
+            path: '',
+            name: 'admin-appointments',
+            component: ()=> import('../views/admin/AppointmentsView.vue'),
+        }
+      ]
+
+    },
   {
       path: '/reservaciones',
       name: 'appointments',
@@ -85,6 +99,18 @@ const router = createRouter({
           component: ()=> import('../views/auth/LoginView.vue')
 
         },
+        {
+          path: 'olvide-password',
+          name: 'forgot-password',
+          component: ()=> import('../views/auth/ForgotPasswordView.vue')
+
+        },
+        {
+          path: 'olvide-password/:token',
+          name: 'new-password',
+          component: ()=> import('../views/auth/NewPasswordView.vue')
+
+        },
 
 
       ]
@@ -99,13 +125,36 @@ router.beforeEach( async(to,from,next) => {
   const requiresAuth = to.matched.some(url => url.meta.requiresAuth)
  if(requiresAuth){
   try {
-     await AuthAPI.auth()
-    next()
+    const { data } =  await AuthAPI.auth()
+    
+    if(data.admin){
+          next({name: 'admin'})
+    }else{
+          next()
+
+    }
+   
     
   } catch (error) {
     next({name: 'login'})
     
   }
+ }else{
+  next()
+ }
+})
+
+router.beforeEach( async(to,from,next) => {
+  const requiresAdmin = to.matched.some(url => url.meta.requiresAdmin)
+ if(requiresAdmin){
+  try {
+    await AuthAPI.admin()
+    next()
+    
+  } catch (error) {
+    next({name:'login'})
+  }
+ 
  }else{
   next()
  }

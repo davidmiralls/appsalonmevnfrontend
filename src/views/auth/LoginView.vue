@@ -61,7 +61,7 @@
                     placeholder="Password de Usuario"
                     validation="required"
                     :validation-messages="{
-                        required: 'El email es obligatorio',
+                        required: 'El password es obligatorio',
                         length: 'Password debe contener al menos 8 caracteres'
 
                     }"
